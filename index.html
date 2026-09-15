@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Saias de Filó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FBF6F0;
+    --bg-alt: #F3E9DE;
+    --card: #FFFFFF;
+    --ink: #2E2224;
+    --ink-soft: #6B5A5C;
+    --rose: #A6435F;
+    --rose-deep: #7C2F45;
+    --blush: #F3D9E2;
+    --gold: #B98A46;
+    --plum: #6B4557;
+    --border: rgba(46,34,36,0.14);
+    --border-strong: rgba(46,34,36,0.28);
+    --danger: #A6432F;
+    --success: #4F7A52;
+    --radius-sm: 6px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --shadow-card: 0 1px 2px rgba(46,34,36,0.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #221A1B;
+      --bg-alt: #2B2122;
+      --card: #2E2324;
+      --ink: #F3E9DE;
+      --ink-soft: #C9B7B9;
+      --rose: #E38CA5;
+      --rose-deep: #F0AABF;
+      --blush: #3D2A31;
+      --gold: #D9B579;
+      --plum: #D9BFCB;
+      --border: rgba(243,233,222,0.14);
+      --border-strong: rgba(243,233,222,0.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #221A1B;
+    --bg-alt: #2B2122;
+    --card: #2E2324;
+    --ink: #F3E9DE;
+    --ink-soft: #C9B7B9;
+    --rose: #E38CA5;
+    --rose-deep: #F0AABF;
+    --blush: #3D2A31;
+    --gold: #D9B579;
+    --plum: #D9BFCB;
+    --border: rgba(243,233,222,0.14);
+    --border-strong: rgba(243,233,222,0.28);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    color:var(--ink);
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:0.5px solid var(--border);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{font-family:'Fraunces', serif;font-size:20px;letter-spacing:0.3px;color:var(--rose-deep);font-style:italic;}
+  .navlinks{display:flex;gap:28px;font-size:14px;color:var(--ink-soft);}
+  .navlinks a{padding:4px 0;border-bottom:1px solid transparent;transition:border-color .15s;}
+  .navlinks a.active, .navlinks a:hover{color:var(--ink);border-color:var(--rose);}
+  .navlinks button.linklike{background:none;border:none;font-size:14px;color:var(--ink-soft);padding:4px 0;}
+  .navlinks button.linklike:hover{color:var(--ink);}
+  .navRight{display:flex;align-items:center;gap:18px;}
+  .bagBtn{position:relative;display:flex;align-items:center;gap:6px;background:none;border:0.5px solid var(--border-strong);border-radius:20px;padding:7px 14px;font-size:13px;color:var(--ink);}
+  .bagCount{background:var(--rose);color:#fff;border-radius:50%;min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;padding:0 4px;}
+  .menuToggle{display:none;background:none;border:none;font-size:22px;color:var(--ink);}
+  @media (max-width:760px){
+    .navlinks{display:none;}
+    .menuToggle{display:block;}
+  }
+  .mobileMenu{display:none;flex-direction:column;gap:2px;padding:10px 0 18px;border-top:0.5px solid var(--border);}
+  .mobileMenu.open{display:flex;}
+  .mobileMenu a, .mobileMenu button{padding:10px 0;font-size:15px;color:var(--ink-soft);background:none;border:none;text-align:left;}
+
+  /* hero */
+  .hero{padding:64px 0 40px;}
+  .heroGrid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;}
+  @media (max-width:820px){ .heroGrid{grid-template-columns:1fr;gap:32px;} .hero{padding:36px 0 24px;} }
+  .eyebrowTag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--plum);background:var(--blush);padding:5px 12px;border-radius:20px;margin-bottom:18px;}
+  .heroTitle{font-size:44px;line-height:1.12;margin-bottom:18px;}
+  @media (max-width:640px){ .heroTitle{font-size:32px;} }
+  .heroTitle em{font-style:italic;color:var(--rose-deep);}
+  .heroText{font-size:16px;color:var(--ink-soft);max-width:42ch;margin-bottom:26px;}
+  .heroActions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:24px;font-size:14.5px;font-weight:500;border:1px solid transparent;transition:transform .12s;}
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--rose);color:#fff;}
+  .btn-primary:hover{background:var(--rose-deep);}
+  .btn-ghost{background:none;border-color:var(--border-strong);color:var(--ink);}
+  .btn-ghost:hover{background:var(--bg-alt);}
+
+  .tulleArt{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;}
+
+  /* section headers */
+  .sectionHead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;gap:16px;flex-wrap:wrap;}
+  .sectionTitle{font-size:26px;}
+  .sectionLink{font-size:13.5px;color:var(--rose-deep);white-space:nowrap;}
+
+  section.block{padding:44px 0;}
+  .block.alt{background:var(--bg-alt);}
+
+  /* filter chips */
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px;}
+  .chip{padding:8px 16px;border-radius:20px;font-size:13.5px;border:0.5px solid var(--border-strong);color:var(--ink-soft);background:none;}
+  .chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+
+  /* product grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr);gap:16px;} }
+  @media (max-width:480px){ .grid{grid-template-columns:1fr 1fr;gap:12px;} }
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-card);display:flex;flex-direction:column;}
+  .cardMedia{aspect-ratio:4/5;background:var(--blush);position:relative;overflow:hidden;}
+  .cardBody{padding:14px 15px 16px;display:flex;flex-direction:column;gap:4px;flex:1;}
+  .cardCat{font-size:11px;color:var(--rose-deep);}
+  .cardName{font-family:'Fraunces',serif;font-size:16px;}
+  .cardPrice{font-size:14px;color:var(--ink-soft);margin-top:2px;}
+  .cardFoot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+  .miniBtn{font-size:12.5px;color:var(--ink);border:0.5px solid var(--border-strong);border-radius:16px;padding:6px 12px;background:none;}
+  .miniBtn:hover{background:var(--bg-alt);}
+  .cardLink{cursor:pointer;}
+
+  /* product detail */
+  .prodGrid{display:grid;grid-template-columns:1fr 1fr;gap:44px;padding:44px 0 60px;}
+  @media (max-width:760px){ .prodGrid{grid-template-columns:1fr;gap:26px;padding:24px 0 40px;} }
+  .prodMedia{aspect-ratio:4/5;background:var(--blush);border-radius:var(--radius-lg);overflow:hidden;}
+  .prodCat{font-size:12.5px;color:var(--rose-deep);margin-bottom:8px;}
+  .prodName{font-size:30px;margin-bottom:10px;}
+  .prodPrice{font-size:19px;color:var(--ink-soft);margin-bottom:20px;}
+  .sizeRow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px;}
+  .sizePill{border:0.5px solid var(--border-strong);border-radius:8px;padding:8px 14px;font-size:13.5px;background:none;color:var(--ink);}
+  .sizePill.selected{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+  .prodDesc{color:var(--ink-soft);font-size:15px;margin-bottom:26px;max-width:48ch;}
+  .backLink{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--ink-soft);margin-top:22px;}
+
+  /* about */
+  .aboutWrap{padding:56px 0;max-width:640px;}
+  .aboutWrap p{color:var(--ink-soft);margin-bottom:16px;font-size:16px;}
+  .aboutWrap h1{font-size:32px;margin-bottom:22px;}
+
+  /* admin */
+  .adminBar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;}
+  .adminNote{background:var(--blush);color:var(--plum);font-size:13px;padding:12px 16px;border-radius:var(--radius-sm);margin-bottom:24px;line-height:1.5;}
+  table.adminTable{width:100%;border-collapse:collapse;font-size:14px;}
+  table.adminTable th{text-align:left;font-weight:500;color:var(--ink-soft);font-size:12.5px;padding:0 10px 8px;border-bottom:0.5px solid var(--border-strong);}
+  table.adminTable td{padding:12px 10px;border-bottom:0.5px solid var(--border);vertical-align:middle;}
+  table.adminTable img.thumb{width:40px;height:50px;object-fit:cover;border-radius:6px;background:var(--blush);}
+  .rowActions{display:flex;gap:8px;}
+  .iconBtn{background:none;border:0.5px solid var(--border-strong);border-radius:8px;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);}
+  .iconBtn:hover{background:var(--bg-alt);}
+  .iconBtn.danger{color:var(--danger);border-color:var(--danger);}
+
+  input[type=text], input[type=number], input[type=password], input[type=url], textarea, select{
+    width:100%;padding:9px 12px;border-radius:8px;border:0.5px solid var(--border-strong);
+    background:var(--card);color:var(--ink);font-family:inherit;font-size:14px;
+  }
+  textarea{resize:vertical;min-height:70px;}
+  label.field{display:block;font-size:12.5px;color:var(--ink-soft);margin-bottom:5px;}
+  .fieldWrap{margin-bottom:14px;}
+  .formRow2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+  .modalOverlay{position:fixed;inset:0;background:rgba(46,34,36,0.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;z-index:100;}
+  .modalCard{background:var(--card);border-radius:var(--radius-md);padding:24px;max-width:480px;width:100%;}
+  .modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .closeX{background:none;border:none;font-size:20px;color:var(--ink-soft);}
+
+  .loginWrap{max-width:340px;margin:80px auto;text-align:center;}
+  .loginWrap .brand{display:block;font-size:24px;margin-bottom:6px;}
+  .loginWrap p{color:var(--ink-soft);font-size:13.5px;margin-bottom:22px;}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 22px;border-radius:24px;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;z-index:200;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+
+  footer{border-top:0.5px solid var(--border);padding:32px 0;margin-top:20px;}
+  .footRow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-soft);}
+
+  .emptyState{text-align:center;padding:60px 0;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#/" class="brand">7 saias de filó</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#/" data-route="/">início</a>
+      <a href="#/catalogo" data-route="/catalogo">saias</a>
+      <a href="#/sobre" data-route="/sobre">sobre</a>
+      <button class="linklike" onclick="goAdmin()">atelier</button>
+    </nav>
+    <div class="navRight">
+      <button class="bagBtn" onclick="openBag()" aria-label="Sacola">
+        <span>sacola</span><span class="bagCount" id="bagCount">0</span>
+      </button>
+      <button class="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+  <div class="wrap mobileMenu" id="mobileMenu">
+    <a href="#/" onclick="toggleMobileMenu()">início</a>
+    <a href="#/catalogo" onclick="toggleMobileMenu()">saias</a>
+    <a href="#/sobre" onclick="toggleMobileMenu()">sobre</a>
+    <button onclick="toggleMobileMenu(); goAdmin();">atelier</button>
+  </div>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<footer>
+  <div class="wrap footRow">
+    <span>7 saias de filó — feitas à mão, uma de cada vez</span>
+    <span id="footYear"></span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- dados de produto ---------- */
+/* No futuro, PRODUCTS_KEY passa a vir de uma API (Cloudflare Worker) em vez do localStorage. */
+const PRODUCTS_KEY = 'sdf_products_v1';
+const CART_KEY = 'sdf_cart_v1';
+const ADMIN_KEY = 'sdf_admin_v1';
+const ADMIN_CODE = 'filo7'; // trocar depois por autenticação real no backend
+
+const DEFAULT_PRODUCTS = [
+  { id:'p1', name:'Saia Nuvem Rosa', category:'dia-a-dia', price:89.9, sizes:['2','4','6','8'], color:'#F3D9E2', desc:'Saia leve em tule macio para o dia a dia, com forro em algodão confortável.', paymentLink:'' },
+  { id:'p2', name:'Saia Jardim Sálvia', category:'dia-a-dia', price:94.9, sizes:['4','6','8','10'], color:'#DCE6D2', desc:'Tons suaves de verde-sálvia, elástico ajustável na cintura.', paymentLink:'' },
+  { id:'p3', name:'Saia Baunilha', category:'dia-a-dia', price:84.9, sizes:['2','4','6'], color:'#F2E7D3', desc:'Neutra e versátil, combina com quase tudo no guarda-roupa.', paymentLink:'' },
+  { id:'p4', name:'Saia Encanto Rosa', category:'festa', price:169.9, sizes:['4','6','8','10'], color:'#EAB8D6', desc:'Camadas de tule para festas e ensaios, com forro de cetim.', paymentLink:'' },
+  { id:'p5', name:'Saia Estrela Dourada', category:'festa', price:189.9, sizes:['4','6','8'], color:'#EBD6A8', desc:'Detalhes dourados bordados à mão, para ocasiões especiais.', paymentLink:'' },
+  { id:'p6', name:'Saia Conto Lilás', category:'festa', price:174.9, sizes:['6','8','10'], color:'#DCCBEA', desc:'Inspirada em contos de fadas, com aplicações delicadas.', paymentLink:'' },
+];
+
+function loadProducts(){
+  const raw = localStorage.getItem(PRODUCTS_KEY);
+  if(!raw){
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(DEFAULT_PRODUCTS));
+    return DEFAULT_PRODUCTS.slice();
+  }
+  try{ return JSON.parse(raw); }catch(e){ return DEFAULT_PRODUCTS.slice(); }
+}
+function saveProducts(list){ localStorage.setItem(PRODUCTS_KEY, JSON.stringify(list)); }
+
+function loadCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY))||[]; }catch(e){ return []; } }
+function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); updateBagCount(); }
+function updateBagCount(){ document.getElementById('bagCount').textContent = loadCart().length; }
+
+function isAdmin(){ return sessionStorage.getItem(ADMIN_KEY) === '1'; }
+
+function money(v){ return v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'}); }
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+/* ---------- ilustração placeholder de saia (SVG leve, sem fotos) ---------- */
+function skirtSvg(color){
+  return `<svg viewBox="0 0 200 240" style="width:100%;height:100%;" preserveAspectRatio="xMidYMid slice">
+    <rect width="200" height="240" fill="${color}" opacity="0.35"/>
+    <ellipse cx="100" cy="60" rx="26" ry="14" fill="${color}" opacity="0.9"/>
+    <path d="M60 70 Q100 50 140 70 L172 220 Q100 245 28 220 Z" fill="${color}"/>
+    <path d="M60 70 Q100 50 140 70 L156 150 Q100 170 44 150 Z" fill="${color}" opacity="0.55"/>
+    <path d="M60 70 Q100 50 140 70 L148 110 Q100 128 52 110 Z" fill="${color}" opacity="0.75"/>
+  </svg>`;
+}
+
+/* ---------- router ---------- */
+const app = document.getElementById('app');
+function router(){
+  const hash = location.hash.replace('#','') || '/';
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.querySelectorAll('.navlinks a').forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('data-route') === hash.split('?')[0]);
+  });
+
+  if(hash === '/' || hash === ''){ renderHome(); }
+  else if(hash.startsWith('/catalogo')){ renderCatalog(); }
+  else if(hash.startsWith('/produto/')){ renderProduct(hash.split('/')[2]); }
+  else if(hash === '/sobre'){ renderAbout(); }
+  else if(hash === '/atelier'){ renderAdmin(); }
+  else { renderHome(); }
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', router);
+
+function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+function goAdmin(){ location.hash = '/atelier'; }
+
+/* ---------- HOME ---------- */
+function renderHome(){
+  const products = loadProducts();
+  const featured = products.slice(0,3);
+  app.innerHTML = `
+    <section class="hero">
+      <div class="heroGrid">
+        <div>
+          <span class="eyebrowTag">feito à mão, uma saia de cada vez</span>
+          <h1 class="heroTitle">Saias para o dia a dia<br>e para <em>momentos que viram história</em></h1>
+          <p class="heroText">Tule leve, costura cuidadosa e cores que as meninas escolhem usar de novo — do parquinho à festa de aniversário.</p>
+          <div class="heroActions">
+            <a href="#/catalogo" class="btn btn-primary">Ver as saias</a>
+            <a href="#/catalogo?cat=festa" class="btn btn-ghost">Coleção de festa</a>
+          </div>
+        </div>
+        <div class="tulleArt">${skirtSvg('#D4537E')}</div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="sectionHead">
+        <h2 class="sectionTitle">Para o dia a dia</h2>
+        <a href="#/catalogo?cat=dia-a-dia" class="sectionLink">ver todas</a>
+      </div>
+      <div class="grid">
+        ${products.filter(p=>p.category==='dia-a-dia').slice(0,3).map(productCard).join('')}
+      </div>
+    </section>
+
+    <section class="block alt">
+      <div class="wrap" style="padding:0;">
+        <div class="sectionHead">
+          <h2 class="sectionTitle">Para ocasiões especiais</h2>
+          <a href="#/catalogo?cat=festa" class="sectionLink">ver todas</a>
+        </div>
+        <div class="grid">
+          ${products.filter(p=>p.category==='festa').slice(0,3).map(productCard).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function productCard(p){
+  return `
+  <a href="#/produto/${p.id}" class="card cardLink">
+    <div class="cardMedia">${skirtSvg(p.color)}</div>
+    <div class="cardBody">
+      <span class="cardCat">${p.category === 'festa' ? 'ocasião especial' : 'dia a dia'}</span>
+      <span class="cardName">${p.name}</span>
+      <span class="cardPrice">${money(p.price)}</span>
+    </div>
+  </a>`;
+}
+
+/* ---------- CATÁLOGO ---------- */
+function renderCatalog(){
+  const params = new URLSearchParams(location.hash.split('?')[1] || '');
+  const activeCat = params.get('cat') || 'todas';
+  const products = loadProducts();
+  const filtered = activeCat === 'todas' ? products : products.filter(p=>p.category===activeCat);
+
+  app.innerHTML = `
+    <section class="block" style="padding-top:36px;">
+      <h1 class="sectionTitle" style="margin-bottom:20px;">Nossas saias</h1>
+      <div class="chips">
+        <button class="chip ${activeCat==='todas'?'active':''}" data-cat="todas">todas</button>
+        <button class="chip ${activeCat==='dia-a-dia'?'active':''}" data-cat="dia-a-dia">dia a dia</button>
+        <button class="chip ${activeCat==='festa'?'active':''}" data-cat="festa">ocasiões especiais</button>
+      </div>
+      <div class="grid" id="catGrid">
+        ${filtered.length ? filtered.map(productCard).join('') : '<div class="emptyState">Nenhuma saia nessa categoria ainda.</div>'}
+      </div>
+    </section>
+  `;
+  app.querySelectorAll('.chip').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ location.hash = '/catalogo?cat=' + btn.dataset.cat; });
+  });
+}
+
+/* ---------- PRODUTO ---------- */
+function renderProduct(id){
+  const products = loadProducts();
+  const p = products.find(x=>x.id===id);
+  if(!p){ app.innerHTML = '<div class="emptyState">Saia não encontrada.<br><a href="#/catalogo" class="backLink">&larr; voltar ao catálogo</a></div>'; return; }
+
+  let selectedSize = p.sizes[0] || null;
+
+  app.innerHTML = `
+    <div class="prodGrid">
+      <div class="prodMedia">${skirtSvg(p.color)}</div>
+      <div>
+        <div class="prodCat">${p.category==='festa' ? 'ocasião especial' : 'dia a dia'}</div>
+        <h1 class="prodName">${p.name}</h1>
+        <div class="prodPrice">${money(p.price)}</div>
+        <p class="prodDesc">${p.desc || ''}</p>
+        <label class="field">tamanho</label>
+        <div class="sizeRow" id="sizeRow">
+          ${p.sizes.map(s=>`<button class="sizePill ${s===selectedSize?'selected':''}" data-size="${s}">${s} anos</button>`).join('')}
+        </div>
+        <div class="heroActions">
+          <button class="btn btn-primary" id="addBtn">Adicionar à sacola</button>
+          <button class="btn btn-ghost" id="buyBtn">Comprar agora</button>
+        </div>
+        <a href="#/catalogo" class="backLink">&larr; voltar ao catálogo</a>
+      </div>
+    </div>
+  `;
+
+  app.querySelectorAll('.sizePill').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      selectedSize = btn.dataset.size;
+      app.querySelectorAll('.sizePill').forEach(b=>b.classList.toggle('selected', b===btn));
+    });
+  });
+
+  document.getElementById('addBtn').addEventListener('click', ()=>{
+    const cart = loadCart();
+    cart.push({ productId:p.id, size:selectedSize });
+    saveCart(cart);
+    showToast('Adicionado à sacola');
+  });
+
+  document.getElementById('buyBtn').addEventListener('click', ()=>{
+    if(p.paymentLink){
+      window.open(p.paymentLink, '_blank');
+    } else {
+      showToast('Link de pagamento ainda não cadastrado para esta saia');
+    }
+  });
+}
+
+/* ---------- SOBRE ---------- */
+function renderAbout(){
+  app.innerHTML = `
+    <div class="aboutWrap">
+      <h1>Sobre o ateliê</h1>
+      <p>7 Saias de Filó nasceu em casa, cortando tule na mesa da cozinha para vestir uma menina que adora rodar de saia. Hoje cada peça ainda é costurada à mão, em pequenos lotes.</p>
+      <p>Trabalhamos com tecidos macios ao toque e forros confortáveis, pensando tanto no brincar do dia a dia quanto nas fotos que ficam guardadas para sempre.</p>
+      <a href="#/catalogo" class="btn btn-primary">Conhecer as saias</a>
+    </div>
+  `;
+}
+
+/* ---------- ADMIN ---------- */
+function renderAdmin(){
+  if(!isAdmin()){ renderAdminLogin(); return; }
+
+  const products = loadProducts();
+  app.innerHTML = `
+    <section class="block" style="padding-top:36px;">
+      <div class="adminBar">
+        <h1 class="sectionTitle">Ateliê — gerenciar saias</h1>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+          <button class="btn btn-primary" id="newProdBtn">Nova saia</button>
+        </div>
+      </div>
+      <div class="adminNote">Os dados aqui ficam salvos só neste navegador por enquanto. Quando o Worker estiver pronto, isso passa a salvar direto no servidor.</div>
+      <table class="adminTable">
+        <thead>
+          <tr><th></th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Link de pagamento</th><th></th></tr>
+        </thead>
+        <tbody id="adminRows">
+          ${products.map(p=>`
+            <tr data-id="${p.id}">
+              <td><div class="thumb" style="width:40px;height:50px;border-radius:6px;overflow:hidden;">${skirtSvg(p.color)}</div></td>
+              <td>${p.name}</td>
+              <td>${p.category==='festa'?'ocasião especial':'dia a dia'}</td>
+              <td>${money(p.price)}</td>
+              <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-soft);font-size:12.5px;">${p.paymentLink || '—'}</td>
+              <td>
+                <div class="rowActions">
+                  <button class="iconBtn editBtn" aria-label="Editar">&#9998;</button>
+                  <button class="iconBtn danger delBtn" aria-label="Excluir">&times;</button>
+                </div>
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </section>
+  `;
+
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    sessionStorage.removeItem(ADMIN_KEY);
+    renderAdmin();
+  });
+  document.getElementById('newProdBtn').addEventListener('click', ()=>openProductModal(null));
+  app.querySelectorAll('.editBtn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const id = e.target.closest('tr').dataset.id;
+      openProductModal(loadProducts().find(p=>p.id===id));
+    });
+  });
+  app.querySelectorAll('.delBtn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const id = e.target.closest('tr').dataset.id;
+      const list = loadProducts().filter(p=>p.id!==id);
+      saveProducts(list);
+      showToast('Saia removida');
+      renderAdmin();
+    });
+  });
+}
+
+function renderAdminLogin(){
+  app.innerHTML = `
+    <div class="loginWrap">
+      <span class="brand">7 saias de filó</span>
+      <p>Acesso do ateliê</p>
+      <div class="fieldWrap" style="text-align:left;">
+        <label class="field">senha</label>
+        <input type="password" id="pass" placeholder="Digite a senha do ateliê">
+        <div id="loginErr" style="color:var(--danger);font-size:12.5px;margin-top:6px;display:none;">Senha incorreta. Tente novamente.</div>
+      </div>
+      <button class="btn btn-primary" id="loginBtn" style="width:100%;justify-content:center;">Entrar</button>
+    </div>
+  `;
+  const tryLogin = ()=>{
+    const val = document.getElementById('pass').value;
+    if(val === ADMIN_CODE){
+      sessionStorage.setItem(ADMIN_KEY, '1');
+      renderAdmin();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+    }
+  };
+  document.getElementById('loginBtn').addEventListener('click', tryLogin);
+  document.getElementById('pass').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
+}
+
+function openProductModal(product){
+  const isNew = !product;
+  const p = product || { id:'p'+Date.now(), name:'', category:'dia-a-dia', price:0, sizes:[], color:'#F3D9E2', desc:'', paymentLink:'' };
+
+  const overlay = document.createElement('div');
+  overlay.className = 'modalOverlay';
+  overlay.innerHTML = `
+    <div class="modalCard">
+      <div class="modalHead">
+        <h3>${isNew ? 'Nova saia' : 'Editar saia'}</h3>
+        <button class="closeX" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="fieldWrap">
+        <label class="field">nome</label>
+        <input type="text" id="f_name" value="${p.name}">
+      </div>
+      <div class="formRow2">
+        <div class="fieldWrap">
+          <label class="field">categoria</label>
+          <select id="f_cat">
+            <option value="dia-a-dia" ${p.category==='dia-a-dia'?'selected':''}>dia a dia</option>
+            <option value="festa" ${p.category==='festa'?'selected':''}>ocasião especial</option>
+          </select>
+        </div>
+        <div class="fieldWrap">
+          <label class="field">preço (R$)</label>
+          <input type="number" id="f_price" value="${p.price}" step="0.01" min="0">
+        </div>
+      </div>
+      <div class="fieldWrap">
+        <label class="field">tamanhos (separados por vírgula)</label>
+        <input type="text" id="f_sizes" value="${(p.sizes||[]).join(', ')}" placeholder="2, 4, 6, 8">
+      </div>
+      <div class="fieldWrap">
+        <label class="field">cor de referência</label>
+        <input type="text" id="f_color" value="${p.color}" placeholder="#F3D9E2">
+      </div>
+      <div class="fieldWrap">
+        <label class="field">descrição</label>
+        <textarea id="f_desc">${p.desc||''}</textarea>
+      </div>
+      <div class="fieldWrap">
+        <label class="field">link de pagamento (Asaas, opcional)</label>
+        <input type="url" id="f_link" value="${p.paymentLink||''}" placeholder="https://...">
+      </div>
+      <div id="formErr" style="color:var(--danger);font-size:12.5px;margin-bottom:12px;display:none;"></div>
+      <button class="btn btn-primary" id="saveProdBtn" style="width:100%;justify-content:center;">Salvar</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.querySelector('.closeX').addEventListener('click', ()=>overlay.remove());
+  overlay.addEventListener('click', (e)=>{ if(e.target===overlay) overlay.remove(); });
+
+  overlay.querySelector('#saveProdBtn').addEventListener('click', ()=>{
+    const name = overlay.querySelector('#f_name').value.trim();
+    const price = parseFloat(overlay.querySelector('#f_price').value);
+    const sizes = overlay.querySelector('#f_sizes').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const err = overlay.querySelector('#formErr');
+
+    if(!name || isNaN(price) || price <= 0 || sizes.length === 0){
+      err.textContent = 'Preencha nome, preço válido e ao menos um tamanho.';
+      err.style.display = 'block';
+      return;
+    }
+
+    const updated = {
+      id: p.id,
+      name,
+      category: overlay.querySelector('#f_cat').value,
+      price,
+      sizes,
+      color: overlay.querySelector('#f_color').value.trim() || '#F3D9E2',
+      desc: overlay.querySelector('#f_desc').value.trim(),
+      paymentLink: overlay.querySelector('#f_link').value.trim(),
+    };
+
+    const list = loadProducts();
+    const idx = list.findIndex(x=>x.id===p.id);
+    if(idx >= 0) list[idx] = updated; else list.push(updated);
+    saveProducts(list);
+    overlay.remove();
+    showToast(isNew ? 'Saia adicionada' : 'Saia atualizada');
+    renderAdmin();
+  });
+}
+
+/* ---------- sacola (mock simples) ---------- */
+function openBag(){
+  const cart = loadCart();
+  const products = loadProducts();
+  if(cart.length === 0){ showToast('Sua sacola está vazia'); return; }
+  const items = cart.map(c=>{
+    const p = products.find(x=>x.id===c.productId);
+    return p ? `${p.name} (${c.size} anos)` : null;
+  }).filter(Boolean);
+  showToast(items.length + ' item(s) na sacola — checkout chega na próxima fase');
+}
+
+/* ---------- init ---------- */
+document.getElementById('footYear').textContent = new Date().getFullYear();
+updateBagCount();
+router();
+</script>
+</body>
+</html>
